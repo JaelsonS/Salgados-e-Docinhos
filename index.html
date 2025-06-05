@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salgados e Docinhos buffet - São Luís do Quitunde</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --rosa-principal: #ff66b3;
+            --preto-detalhes: #333333;
+            --amarelo-detalhes: #ffcc00;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .navbar-brand img {
+            height: 60px;
+        }
+        
+        .bg-rosa {
+            background-color: var(--rosa-principal);
+        }
+        
+        .text-rosa {
+            color: var(--rosa-principal);
+        }
+        
+        .btn-rosa {
+            background-color: var(--rosa-principal);
+            color: white;
+        }
+        
+        .btn-rosa:hover {
+            background-color: #e55fa0;
+            color: white;
+        }
+        
+        .destaque-amarelo {
+            border-bottom: 3px solid var(--amarelo-detalhes);
+            display: inline-block;
+        }
+        
+        .card-salgado, .card-doce {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .card-salgado:hover, .card-doce:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-salgado .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-salgado .card-body {
+            background-color: var(--preto-detalhes);
+            color: white;
+        }
+        
+        .card-doce .card-body {
+            background-color: white;
+            color: var(--preto-detalhes);
+            border-top: 5px solid var(--amarelo-detalhes);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--rosa-principal);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0;
+            text-align: center;
+        }
+        
+        .valores-box {
+            padding: 30px;
+            border-radius: 10px;
+            height: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .valores-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .missao {
+            border-top: 5px solid var(--rosa-principal);
+        }
+        
+        .visao {
+            border-top: 5px solid var(--amarelo-detalhes);
+        }
+        
+        .valores {
+            border-top: 5px solid var(--preto-detalhes);
+        }
+        
+        .galeria-item {
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .galeria-item img {
+            transition: transform 0.5s;
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .galeria-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .galeria-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .galeria-item:hover .galeria-overlay {
+            opacity: 1;
+        }
+        
+        .form-agendamento {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        footer {
+            background-color: var(--preto-detalhes);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--rosa-principal);
+        }
+        
+        /* Animações para mobile */
+        @media (max-width: 768px) {
+            .animate-on-scroll {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.8s ease-out;
+            }
+            
+            .animate-on-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">
+                <img src="https://via.placeholder.com/180x60?text=Bárbara+Lopes+Buffet" alt="Salgados e Docinhos Buffet" class="img-fluid">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cardapio">Cardápio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galeria">Galeria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#valores">Valores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#agendamento">Agendamento</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">Bárbara Lopes Buffet</h1>
+                    <p class="lead mb-5 animate__animated animate__fadeInUp animate__delay-1s">Transformando momentos em memórias inesquecíveis em São Luís do Quitunde</p>
+                    <a href="#agendamento" class="btn btn-rosa btn-lg px-4 py-2 animate__animated animate__fadeInUp animate__delay-2s">Agende Seu Evento</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div id="eventosCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#eventosCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#eventosCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#eventosCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner rounded-3">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="d-block w-100" alt="Evento 1" style="height: 500px; object-fit: cover;">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                            <h5>Casamentos Memoráveis</h5>
+                            <p>Faça do seu grande dia uma experiência única com nossa gastronomia.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="d-block w-100" alt="Evento 2" style="height: 500px; object-fit: cover;">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                            <h5>Aniversários Especiais</h5>
+                            <p>Celebre cada ano de vida com sabores que marcam época.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="d-block w-100" alt="Evento 3" style="height: 500px; object-fit: cover;">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                            <h5>Eventos Corporativos</h5>
+                            <p>Impressione seus clientes e colaboradores com nossa excelência gastronômica.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#eventosCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#eventosCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Nossa <span class="destaque-amarelo">História</span></h2>
+                    <p class="lead">De humildes começos à referência em buffet em São Luís do Quitunde</p>
+                </div>
+            </div>
+            
+            <div class="row align-items-center animate-on-scroll">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Bárbara Lopes" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="mb-4 text-rosa">Salgados e Docinhos: Uma Jornada de Sabor e Determinação</h3>
+                    <p>Tudo começou em 2015, quando Bárbara Lopes, então uma jovem empreendedora, começou a vender salgados de porta em porta em São Luís do Quitunde. Com receitas familiares e um toque especial, seus produtos rapidamente conquistaram a comunidade.</p>
+                    <p>O amor pelo trabalho bem feito e a paixão pela culinária transformaram pequenos pedidos em encomendas maiores, até que em 2018, Bárbara decidiu oficializar seu negócio, fundando o "Bárbara Lopes Buffet".</p>
+                    <p>Hoje, com uma equipe dedicada e uma estrutura profissional, atendemos aos mais diversos eventos na região, sempre mantendo a qualidade caseira que nos tornou referência. Cada salgado, cada doce, carrega não apenas ingredientes selecionados, mas toda a dedicação de uma história que começou pequena e cresceu com amor.</p>
+                    <div class="mt-4">
+                        <a href="#cardapio" class="btn btn-outline-dark me-2">Conheça Nosso Cardápio</a>
+                        <a href="#agendamento" class="btn btn-rosa">Agende Seu Evento</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cardapio" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Nosso <span class="destaque-amarelo">Cardápio</span></h2>
+                    <p class="lead">Sabores que encantam e momentos que ficam</p>
+                </div>
+            </div>
+            
+            <ul class="nav nav-tabs justify-content-center mb-4" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="salgados-tab" data-bs-toggle="tab" data-bs-target="#salgados" type="button" role="tab" aria-controls="salgados" aria-selected="true">Salgados</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="doces-tab" data-bs-toggle="tab" data-bs-target="#doces" type="button" role="tab" aria-controls="doces" aria-selected="false">Doces</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="salgados" role="tabpanel" aria-labelledby="salgados-tab">
+                    <div class="row animate-on-scroll">
+                        <div class="col-md-4">
+                            <div class="card card-salgado">
+                                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80" class="card-img-top" alt="Coxinha">
+                                <div class="card-body">
+                                    <h5 class="card-title">Coxinha de Frango</h5>
+                                    <p class="card-text">Massa crocante com recheio de frango desfiado temperado.</p>
+                                    <p class="fw-bold">R$ 5,00 (unidade)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-salgado">
+                                <img src="https://img.freepik.com/fotos-gratis/delicioso-prato-tradicional-portugues-empadao_23-2149862968.jpg?ga=GA1.1.732298858.1745221544&semt=ais_items_boosted&w=740" class="card-img-top" alt="Empada">
+                                <div class="card-body">
+                                    <h5 class="card-title">Empada de Palmito</h5>
+                                    <p class="card-text">Massa folhada com recheio cremoso de palmito.</p>
+                                    <p class="fw-bold">R$ 6,00 (unidade)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-salgado">
+                                <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" class="card-img-top" alt="Enroladinho">
+                                <div class="card-body">
+                                    <h5 class="card-title">Enroladinho de Salsicha</h5>
+                                    <p class="card-text">Massa crocante enrolada em salsicha premium.</p>
+                                    <p class="fw-bold">R$ 4,50 (unidade)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="doces" role="tabpanel" aria-labelledby="doces-tab">
+                    <div class="row animate-on-scroll">
+                        <div class="col-md-4">
+                            <div class="card card-doce">
+                                <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Brigadeiro">
+                                <div class="card-body">
+                                    <h5 class="card-title">Brigadeiro Gourmet</h5>
+                                    <p class="card-text">O tradicional brigadeiro com chocolate belga e granulado especial.</p>
+                                    <p class="fw-bold">R$ 3,50 (unidade)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-doce">
+                                <img src="https://images.unsplash.com/photo-1558326567-98ae2405596b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1526&q=80" class="card-img-top" alt="Beijinho">
+                                <div class="card-body">
+                                    <h5 class="card-title">Beijinho de Coco</h5>
+                                    <p class="card-text">Doce de leite com coco fresco, envolto em açúcar cristal.</p>
+                                    <p class="fw-bold">R$ 3,50 (unidade)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-doce">
+                                <img src="https://images.unsplash.com/photo-1612203985729-70726954388c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Cupcake">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cupcake Premium</h5>
+                                    <p class="card-text">Massa fofinha com coberturas variadas e decoradas à mão.</p>
+                                    <p class="fw-bold">R$ 8,00 (unidade)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5 animate-on-scroll">
+                <a href="#agendamento" class="btn btn-rosa btn-lg">Solicitar Cardápio Completo</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Nossos <span class="destaque-amarelo">Eventos</span></h2>
+                    <p class="lead">Alguns dos momentos especiais que criamos juntos</p>
+                </div>
+            </div>
+            
+            <div class="row animate-on-scroll">
+                <div class="col-md-4 col-sm-6">
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Evento 1" class="img-fluid">
+                        <div class="galeria-overlay">
+                            <h5 class="text-white">Casamento Ana e Carlos</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Evento 2" class="img-fluid">
+                        <div class="galeria-overlay">
+                            <h5 class="text-white">Festa de 15 Anos</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Evento 3" class="img-fluid">
+                        <div class="galeria-overlay">
+                            <h5 class="text-white">Confraternização Empresarial</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Evento 4" class="img-fluid">
+                        <div class="galeria-overlay">
+                            <h5 class="text-white">Aniversário Infantil</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Evento 5" class="img-fluid">
+                        <div class="galeria-overlay">
+                            <h5 class="text-white">Festa de Formatura</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="galeria-item">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Evento 6" class="img-fluid">
+                        <div class="galeria-overlay">
+                            <h5 class="text-white">Evento Beneficente</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 animate-on-scroll">
+                <a href="#" class="btn btn-outline-dark">Ver Mais Eventos</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center animate-on-scroll">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">Conheça Nosso Trabalho</h2>
+                    <div class="ratio ratio-16x9">
+                        <iframe width="851" height="480" src="https://www.youtube.com/embed/eOAqXP8zt2s" title="Mesas de doces e salgadinhos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="valores" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Nossos <span class="destaque-amarelo">Valores</span></h2>
+                    <p class="lead">O que nos move e nos diferencia</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 animate-on-scroll">
+                <div class="col-md-4">
+                    <div class="valores-box missao">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-bullseye fa-3x text-rosa"></i>
+                        </div>
+                        <h3 class="text-center mb-3">Missão</h3>
+                        <p class="text-center">Encantar nossos clientes através da excelência em gastronomia, transformando eventos em momentos memoráveis com sabores autênticos e atendimento personalizado.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="valores-box visao">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-eye fa-3x" style="color: var(--amarelo-detalhes);"></i>
+                        </div>
+                        <h3 class="text-center mb-3">Visão</h3>
+                        <p class="text-center">Ser reconhecida como referência em buffet na região de São Luís do Quitunde, expandindo nossos serviços com qualidade e mantendo nossos valores essenciais.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="valores-box valores">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-heart fa-3x" style="color: var(--preto-detalhes);"></i>
+                        </div>
+                        <h3 class="text-center mb-3">Valores</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-rosa me-2"></i> Qualidade acima de tudo</li>
+                            <li class="mb-2"><i class="fas fa-check text-rosa me-2"></i> Respeito aos clientes</li>
+                            <li class="mb-2"><i class="fas fa-check text-rosa me-2"></i> Inovação constante</li>
+                            <li class="mb-2"><i class="fas fa-check text-rosa me-2"></i> Compromisso com a comunidade</li>
+                            <li><i class="fas fa-check text-rosa me-2"></i> Paixão pelo que fazemos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="agendamento" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Agende Seu <span class="destaque-amarelo">Evento</span></h2>
+                    <p class="lead">Preencha o formulário abaixo e em breve entraremos em contato</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center animate-on-scroll">
+                <div class="col-lg-8">
+                    <div class="form-agendamento">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nome" class="form-label">Nome Completo</label>
+                                    <input type="text" class="form-control" id="nome" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="telefone" class="form-label">Telefone</label>
+                                    <input type="tel" class="form-control" id="telefone" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="evento" class="form-label">Tipo de Evento</label>
+                                    <select class="form-select" id="evento" required>
+                                        <option value="" selected disabled>Selecione...</option>
+                                        <option value="casamento">Casamento</option>
+                                        <option value="aniversario">Aniversário</option>
+                                        <option value="corporativo">Evento Corporativo</option>
+                                        <option value="infantil">Festa Infantil</option>
+                                        <option value="outro">Outro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="data" class="form-label">Data do Evento</label>
+                                    <input type="date" class="form-control" id="data" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="convidados" class="form-label">Número de Convidados</label>
+                                    <input type="number" class="form-control" id="convidados" min="10" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="mensagem" class="form-label">Mensagem</label>
+                                    <textarea class="form-control" id="mensagem" rows="4" placeholder="Nos conte mais sobre seu evento..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="termos" required>
+                                        <label class="form-check-label" for="termos">
+                                            Concordo com os termos de serviço e política de privacidade
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-rosa btn-lg px-5">Enviar Solicitação</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">O Que Dizem <span class="destaque-amarelo">Sobre Nós</span></h2>
+                    <p class="lead">A satisfação dos nossos clientes é nossa maior recompensa</p>
+                </div>
+            </div>
+            
+            <div class="row animate-on-scroll">
+                <div class="col-lg-8 mx-auto">
+                    <div id="depoimentosCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body p-4 text-center">
+                                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle mb-3" width="80" alt="Cliente 1">
+                                        <h5 class="mb-3">Maria Silva</h5>
+                                        <div class="mb-3 text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="mb-0">"Contratei o Salgados e Docinhos Buffet para o casamento da minha filha e foi perfeito! Os salgados estavam deliciosos, a apresentação impecável e o atendimento foi além das expectativas. Recomendo de olhos fechados!"</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body p-4 text-center">
+                                        <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle mb-3" width="80" alt="Cliente 2">
+                                        <h5 class="mb-3">Carlos Andrade</h5>
+                                        <div class="mb-3 text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="mb-0">"Para nossa confraternização de fim de ano, escolhemos o Bárbara Lopes Buffet e foi a melhor decisão. Desde o atendimento personalizado até a qualidade dos alimentos, tudo foi perfeito. Já garantimos para o próximo ano!"</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body p-4 text-center">
+                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle mb-3" width="80" alt="Cliente 3">
+                                        <h5 class="mb-3">Ana Paula Oliveira</h5>
+                                        <div class="mb-3 text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="mb-0">"Os doces da Bárbara são divinos! Contratei para a festa de 15 anos da minha filha e todos elogiaram muito. Além da qualidade, o carinho e atenção com que nos trataram fez toda a diferença. Super recomendo!"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#depoimentosCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon bg-rosa rounded-circle p-3" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#depoimentosCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon bg-rosa rounded-circle p-3" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <img src="https://via.placeholder.com/180x60?text=Bárbara+Lopes+Buffet" alt="Salgados e Docinhos Buffet" class="img-fluid mb-3">
+                    <p>Transformando momentos em memórias através da gastronomia em São Luís do Quitunde e região.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#inicio" class="text-white text-decoration-none">Início</a></li>
+                        <li class="mb-2"><a href="#sobre" class="text-white text-decoration-none">Sobre Nós</a></li>
+                        <li class="mb-2"><a href="#cardapio" class="text-white text-decoration-none">Cardápio</a></li>
+                        <li class="mb-2"><a href="#galeria" class="text-white text-decoration-none">Galeria</a></li>
+                        <li class="mb-2"><a href="#agendamento" class="text-white text-decoration-none">Agendamento</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">Contato</h5>
+                    <ul class="list-unstyled text-white">
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> São Luís do Quitunde, AL</li>
+                        <li class="mb-3"><i class="fas fa-phone me-2"></i> (82) 99999-9999</li>
+                        <li class="mb-3"><i class="fas fa-envelope me-2"></i> contato@salgadosedocinhosbuffet.com</li>
+                        <li><i class="fas fa-clock me-2"></i> Seg-Sex: 8h-18h | Sáb: 8h-12h</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-5 bg-light">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2023 Salgados e Docinhos Buffet. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animação de scroll para mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth <= 768) {
+                const animateElements = document.querySelectorAll('.animate-on-scroll');
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+                
+                animateElements.forEach(element => {
+                    observer.observe(element);
+                });
+            }
+            
+            // Smooth scrolling para links internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
